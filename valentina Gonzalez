@@ -1,0 +1,32 @@
+int boton = 9;
+int LCD_DB2 = 4;
+int LCD_DB3 = 5;
+int LCD_DB4 = 6;
+int LCD_DB5 = 7;
+int LCD_DB6 = 8;
+int fotorresistencia = 10;
+int tira6_neopixels = 11;
+void setup()
+{
+  pinMode(boton, OUTPUT);
+  pinMode(LCD_DB2, OUTPUT);
+  pinMode(LCD_DB3, OUTPUT);
+  pinMode(LCD_DB4, OUTPUT);
+  pinMode(LCD_DB5, OUTPUT);
+  pinMode(LCD_DB6, OUTPUT);
+  pinMode(fotorresistencia,OUTPUT);
+  pinMode(tira6_neopixels,  INPUT);
+}
+
+void loop()
+{
+ bool botonActivado = true; //se prende
+ bool botonDesactivado = false; //se apaga
+   
+ if( botonActivado == HIGH && botonDesactivado == LOW)
+ 
+ botonActivado = !botonActivado;
+ 
+ if(
+   
+}
