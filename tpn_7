@@ -1,0 +1,59 @@
+int boton = 8;
+int Buzzer = 4;
+
+int led_R = 5;
+int led_G = 6;
+int led_B = 7;
+
+bool alarmaActivada = false;
+bool estadoBotonInicial = false;
+
+void setup()
+{
+  pinMode(boton, INPUT);
+
+  pinMode(Buzzer, OUTPUT);
+
+  pinMode(led_R, OUTPUT);
+  pinMode(led_G, OUTPUT);
+  pinMode(led_B, OUTPUT);
+
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  int estadoBoton = digitalRead(boton);
+
+  if (estadoBoton == HIGH && estadoBotonInicial == LOW)
+  {
+    alarmaActivada = !alarmaActivada;
+    delay(300);
+  }
+
+  estadoBotonInicial = estadoBoton;
+
+  if (alarmaActivada == true)
+  {
+    digitalWrite(led_R, HIGH);
+    digitalWrite(led_G, HIGH);
+    digitalWrite(led_B, HIGH);
+
+    digitalWrite(Buzzer, HIGH);
+    delay(500);
+
+    digitalWrite(led_R, LOW);
+    digitalWrite(led_G, LOW);
+    digitalWrite(led_B, LOW);
+
+    digitalWrite(Buzzer, LOW);
+    delay(500);
+  }
+  else
+  {
+    digitalWrite(led_R, LOW);
+    digitalWrite(led_G, LOW);
+    digitalWrite(led_B, LOW);
+    digitalWrite(Buzzer, LOW);
+  }
+}
