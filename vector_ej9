@@ -1,0 +1,27 @@
+int ledR = 9;
+int ledG = 10;
+int ledB = 11;
+
+int colores[3][3] = {
+  {122, 234, 21},
+  {33, 53, 155},
+  {200, 255, 12}
+};
+
+void setup()
+{
+  pinMode(ledR, OUTPUT);
+  pinMode(ledG, OUTPUT);
+  pinMode(ledB, OUTPUT);
+}
+
+void loop()
+{
+  for (int i = 0; i < 3; i++)
+  {
+    analogWrite(ledR, colores[i][0]);
+    analogWrite(ledG, colores[i][1]);
+    analogWrite(ledB, colores[i][2]);
+    delay(1000);
+  }
+}
