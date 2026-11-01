@@ -1,0 +1,73 @@
+
+#define BUZZ 9
+
+#define NOTE_C4 262
+#define NOTE_D4 294
+#define NOTE_E4 330
+#define NOTE_F4 349
+#define NOTE_G4 392
+#define NOTE_A4 440
+#define NOTE_B4 494
+#define NOTE_C5 523
+
+#define lenght(vec,tipo) sizeof(vec) / sizeof(tipo)
+
+int notas[] = {NOTE_C4, NOTE_E4, NOTE_G4, NOTE_E4, NOTE_D4, NOTE_F4, NOTE_A4, NOTE_F4, NOTE_E4, NOTE_G4, NOTE_C5, NOTE_G4, NOTE_F4, NOTE_A4, NOTE_C5, NOTE_A4, NOTE_G4, NOTE_E4, NOTE_C4, NOTE_E4, NOTE_D4, NOTE_F4, NOTE_A4, NOTE_F4, NOTE_E4, NOTE_G4, NOTE_C5, NOTE_G4, NOTE_A4, NOTE_G4, NOTE_E4, NOTE_C4};
+
+int figuras[] = {8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8};
+
+int tempo = 100;
+int duracionRedonda = (60000 * 4) / tempo;
+int cantidad = lenght(notas,int);
+
+
+void playNote(int note, int duration)
+{
+  if(note == 0)
+  {
+    noTone(BUZZ);
+  }
+  else
+  {
+    tone(BUZZ, note, duration);
+  }
+
+  delay(duration);
+  noTone(BUZZ);
+}
+
+
+int cuadritosToDuration(int cuadritos)
+{
+  return duracionRedonda * cuadritos / 32;
+}
+
+
+void playMelody(const int notas[], const int figuras[], int length)
+{
+  for(int i = 0; i < length; i++)
+  {
+    int cuadritos = 64 / abs(figuras[i]);
+    int duracion = cuadritosToDuration(cuadritos);
+
+    playNote(notas[i], duracion);
+  }
+}
+
+
+void pauseBetweenLoops(int seconds)
+{
+  noTone(BUZZ);
+  delay(seconds * 1000);
+}
+
+void setup()
+{
+  pinMode(BUZZ, OUTPUT);
+}
+
+void loop()
+{
+  playMelody(notas, figuras, cantidad);
+  pauseBetweenLoops(3);
+}
